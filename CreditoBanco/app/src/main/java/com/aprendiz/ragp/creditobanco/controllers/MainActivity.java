@@ -2,6 +2,12 @@ package com.aprendiz.ragp.creditobanco.controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aprendiz.ragp.creditobanco.R;
@@ -27,15 +33,66 @@ public class MainActivity extends AppCompatActivity {
     List<Tasa> tasaList = new ArrayList<>();
     List<Cliente> clienteList = new ArrayList<>();
 
+    Spinner spModulo,spTipoSolicitud,spCliente;
+    EditText txtMontoCredito, txtPlazo, txtTea, txtSeguro;
+    TextView txtTotal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        inizialite();
+        listar();
         setContentView(R.layout.activity_main);
         try {
             inputDataBase();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+    }
+
+    private void inizialite() {
+        spModulo = findViewById(R.id.spinnerModulo);
+        spTipoSolicitud = findViewById(R.id.spinnerTipoOperacion);
+        spCliente = findViewById(R.id.spinnerCategoriaCliente);
+        txtMontoCredito  = findViewById(R.id.txtMontoCredito);
+        txtPlazo = findViewById(R.id.txtPlazo);
+        txtTea = findViewById(R.id.txtTea);
+        txtSeguro = findViewById(R.id.txtSeguro);
+        txtTotal = findViewById(R.id.txtResultado);
+    }
+
+    private void listar() {
+        final ManagerDB managerDB = new ManagerDB(this);
+        moduloList = managerDB.selectModulo();
+        List<String> tmpModulos = new ArrayList<>();
+        for (int i=0; i<moduloList.size(); i++){
+            tmpModulos.add(moduloList.get(i).getId()+" "+moduloList.get(i).getNombre());
+        }
+
+        ArrayAdapter adapterModulo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,tmpModulos);
+        spModulo.setAdapter(adapterModulo);
+        spModulo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                solicitudList = managerDB.selectSolicitud(moduloList.get(0).getId());
+                List<String> tmpSolicitudes = new ArrayList<>();
+                for (int i=0; i<solicitudList.size(); i++){
+                    tmpSolicitudes.add(solicitudList.get(i).getId()+" "+solicitudList.get(i).getNombre());
+                }
+                ArrayAdapter adapterSolicitud = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item,tmpSolicitudes);
+                spTipoSolicitud.setAdapter(adapterSolicitud);
+            }
+        });
+
+        clienteList = managerDB.selectCliente();
+        List<String> tmpClientes = new ArrayList<>();
+        for (int i=0; i<clienteList.size(); i++){
+            tmpClientes.add(clienteList.get(i).getId()+" "+clienteList.get(i).getNombre());
+        }
+
+        ArrayAdapter adapterCliente = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,tmpClientes);
+        spCliente.setAdapter(adapterCliente);
 
 
     }
