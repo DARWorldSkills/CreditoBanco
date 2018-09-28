@@ -1,10 +1,10 @@
 package com.aprendiz.ragp.creditobanco.models;
 
-public class Modulo {
+public class Cliente {
     private int id;
     private String nombre;
 
-    public Modulo() {
+    public Cliente() {
     }
 
     public int getId() {

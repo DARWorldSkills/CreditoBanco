@@ -1,10 +1,11 @@
 package com.aprendiz.ragp.creditobanco.models;
 
-public class Modulo {
+public class Solicitud {
     private int id;
     private String nombre;
+    private int modulo;
 
-    public Modulo() {
+    public Solicitud() {
     }
 
     public int getId() {
@@ -21,5 +22,13 @@ public class Modulo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(int modulo) {
+        this.modulo = modulo;
     }
 }
