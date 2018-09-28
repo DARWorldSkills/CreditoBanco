@@ -19,4 +19,9 @@
     <string name="plazo_maximo">Plazo maximo</string>
     <string name="monto_maximo">Monto maximo</string>
     <string name="monto_credito">credito</string>
+
+
+    <string name="resultado">APARTIR DE LA SEGUNDA CUOTA</string>
+    <string name="textview">TextView</string>
+    <string name="calcular">Calcular</string>
 </resources>
