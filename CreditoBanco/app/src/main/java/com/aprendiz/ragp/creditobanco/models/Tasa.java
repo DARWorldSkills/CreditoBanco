@@ -1,9 +1,9 @@
 package com.aprendiz.ragp.creditobanco.models;
 
-class Tasa {
+public class Tasa {
     private int rTapizar;
     private int tamano;
-    private int tasaTa;
+    private float tasaTa;
 
     public Tasa() {
     }
@@ -24,11 +24,11 @@ class Tasa {
         this.tamano = tamano;
     }
 
-    public int getTasaTa() {
+    public float getTasaTa() {
         return tasaTa;
     }
 
-    public void setTasaTa(int tasaTa) {
+    public void setTasaTa(float tasaTa) {
         this.tasaTa = tasaTa;
     }
 }
