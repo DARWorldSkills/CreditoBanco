@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">CreditoBanco</string>
+    <string name="modulo">MODULO</string>
+    <string name="tipodeoperacion">TIPO DE OPERACION</string>
+    <string name="tipodesolicitud">TIPO DE SOLICITUD</string>
+    <string name="destino">DESTINO</string>
+    <string name="categoriacliente">CATEGORIA CLIENTE</string>
+    <string name="montocredito">MONTO CREDITO</string>
+    <string name="seguro">SEGURO</string>
+    <string name="totalcredito">TOTAL CREDITO</string>
+    <string name="plazo">PLAZO</string>
+    <string name="plazomaxino">PLAZO MAXIMO</string>
+    <string name="montomaximo">MONTO MAXIMO</string>
+    <string name="tea">TEA</string>
 </resources>
