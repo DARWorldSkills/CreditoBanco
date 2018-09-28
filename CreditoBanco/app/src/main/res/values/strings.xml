@@ -12,4 +12,11 @@
     <string name="plazomaxino">PLAZO MAXIMO</string>
     <string name="montomaximo">MONTO MAXIMO</string>
     <string name="tea">TEA</string>
+    <string name="montocreditohint">Monto credito</string>
+    <string name="seguro_hint">Seguro</string>
+    <string name="total_credito">Total credito</string>
+    <string name="plazo_hint">Plazo</string>
+    <string name="plazo_maximo">Plazo maximo</string>
+    <string name="monto_maximo">Monto maximo</string>
+    <string name="monto_credito">credito</string>
 </resources>
