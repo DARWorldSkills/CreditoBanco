@@ -46,7 +46,7 @@ public class ManagerDB {
         ContentValues values = new ContentValues();
         values.put("IDSOLICITUD",solicitud.getId());
         values.put("NOMBRE",solicitud.getNombre());
-        values.put("MODULO",solicitud.getNombre());
+        values.put("MODULO",solicitud.getModulo());
         db.insert("SOLICITUD",null,values);
         closeDB();
     }
@@ -168,10 +168,12 @@ public class ManagerDB {
     public float selectTasa(int rTapizar, int tamano){
         float tasa =0;
         openDBRead();
-        Cursor cursor = db.rawQuery("SELECT TASATA FROM TASA WHERE RTAPIZAR="+rTapizar+" AND TAMANO="+tamano+";",null);
+        Cursor cursor = db.rawQuery("SELECT TATASA FROM TASA WHERE RTAPIZAR="+rTapizar+" AND TAMANO<"+tamano+";",null);
         if (cursor.moveToFirst()){
             do {
-                tasa=cursor.getFloat(0);
+                if (tasa == 0) {
+                    tasa = cursor.getFloat(0);
+                }
 
             }while (cursor.moveToNext());
         }
