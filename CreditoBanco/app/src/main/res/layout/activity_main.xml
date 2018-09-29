@@ -340,7 +340,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
 
+=======
+>>>>>>> badf448bcf4c5ce4f59542ab9be003e540d92cc7
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
             tools:ignore="MissingConstraints">
 
@@ -883,9 +886,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout14" />
 
+<<<<<<< HEAD
 
     </android.support.constraint.ConstraintLayout>
+=======
+>>>>>>> badf448bcf4c5ce4f59542ab9be003e540d92cc7
 
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>
 
 

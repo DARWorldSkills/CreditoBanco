@@ -165,24 +165,19 @@ public class ManagerDB {
     }
 
 
-    public List<Tasa> selectTasa(int rTapizar, int tamano){
-        List<Tasa> results = new ArrayList<>();
+    public float selectTasa(int rTapizar, int tamano){
+        float tasa =0;
         openDBRead();
         Cursor cursor = db.rawQuery("SELECT TASATA FROM TASA WHERE RTAPIZAR="+rTapizar+" AND TAMANO="+tamano+";",null);
         if (cursor.moveToFirst()){
             do {
-                Tasa tasa = new Tasa();
-                tasa.setTasaTa(cursor.getInt(0));
+                tasa=cursor.getFloat(0);
 
-
-                results.add(tasa);
             }while (cursor.moveToNext());
         }
-
         cursor.close();
         closeDB();
-
-        return results;
+        return tasa;
     }
 
 
