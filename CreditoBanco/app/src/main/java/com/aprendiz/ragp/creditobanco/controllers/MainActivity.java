@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     EditText txtMontoCredito, txtPlazo, txtTea, txtSeguro;
     TextView txtTotal;
     int positionSolicitud=0,positionCliente;
-    float tapiza =0;
+    int tapiza =0, tamano=0;
+    float tasaTA=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,6 +188,11 @@ public class MainActivity extends AppCompatActivity {
     public void calcularTapiza(){
         ManagerDB managerDB = new ManagerDB(this);
         tapiza= managerDB.selectTapizar(solicitudList.get(positionSolicitud).getId(),clienteList.get(positionCliente).getId()).get(0).getRetorno();
+
+    }
+    public  void calcularTasa(){
+        ManagerDB managerDB = new ManagerDB(this);
+        tasaTA = managerDB.selectTasa(tapiza,tamano);
 
     }
 
