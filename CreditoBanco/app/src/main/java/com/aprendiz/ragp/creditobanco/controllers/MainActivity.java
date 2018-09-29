@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void inputDataBase() throws IOException {
         ManagerDB managerDB = new ManagerDB(this);
         List<Cliente> clientes  = managerDB.selectCliente();
