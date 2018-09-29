@@ -24,4 +24,10 @@
     <string name="resultado">APARTIR DE LA SEGUNDA CUOTA</string>
     <string name="textview">0</string>
     <string name="calcular">Calcular</string>
+
+    <string name="tasanomina">TASA NOMINAL</string>
+    <string name="tasanominamensual">TASA NOMINAL MENSUAL</string>
+    <string name="ivaa">IVA</string>
+    <string name="comision">COMISION</string>
+
 </resources>
