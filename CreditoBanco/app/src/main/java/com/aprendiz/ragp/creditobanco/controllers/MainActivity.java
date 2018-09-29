@@ -36,18 +36,19 @@ public class MainActivity extends AppCompatActivity {
     Spinner spModulo,spTipoSolicitud,spCliente;
     EditText txtMontoCredito, txtPlazo, txtTea, txtSeguro;
     TextView txtTotal;
+    int positionSolicitud=0,positionCliente;
+    float tapiza =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        inizialite();
-        listar();
         setContentView(R.layout.activity_main);
-
+        inizialite();
         try {
             inputDataBase();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        listar();
 
 
     }
@@ -70,18 +71,35 @@ public class MainActivity extends AppCompatActivity {
             tmpModulos.add(moduloList.get(i).getId()+" "+moduloList.get(i).getNombre());
         }
 
-        ArrayAdapter adapterModulo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,tmpModulos);
+        ArrayAdapter<String> adapterModulo = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,tmpModulos);
         spModulo.setAdapter(adapterModulo);
-        spModulo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spModulo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                solicitudList = managerDB.selectSolicitud(moduloList.get(0).getId());
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                solicitudList = managerDB.selectSolicitud(moduloList.get(position).getId());
+                Toast.makeText(MainActivity.this, ""+solicitudList.get(0).getModulo(), Toast.LENGTH_SHORT).show();
                 List<String> tmpSolicitudes = new ArrayList<>();
                 for (int i=0; i<solicitudList.size(); i++){
                     tmpSolicitudes.add(solicitudList.get(i).getId()+" "+solicitudList.get(i).getNombre());
                 }
                 ArrayAdapter adapterSolicitud = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_spinner_dropdown_item,tmpSolicitudes);
                 spTipoSolicitud.setAdapter(adapterSolicitud);
+                spTipoSolicitud.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        positionSolicitud=position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -93,6 +111,18 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter adapterCliente = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,tmpClientes);
         spCliente.setAdapter(adapterCliente);
+        spCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                positionCliente=position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
 
     }
@@ -154,5 +184,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void calcularTapiza(){
+        ManagerDB managerDB = new ManagerDB(this);
+        tapiza= managerDB.selectTapizar(solicitudList.get(positionSolicitud).getId(),clienteList.get(positionCliente).getId()).get(0).getRetorno();
+
+    }
 
 }
