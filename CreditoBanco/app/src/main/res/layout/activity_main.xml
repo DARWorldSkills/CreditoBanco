@@ -24,7 +24,7 @@
             android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
 
         <View
 
@@ -315,6 +315,7 @@
                 android:text="@string/seguro"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
+                android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -337,6 +338,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/seguro_hint"
                     android:inputType="number"
+                    android:enabled="false"
                     android:textColor="#000" />
             </android.support.design.widget.TextInputLayout>
 
@@ -390,6 +392,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/total_credito"
                     android:inputType="number"
+                    android:enabled="false"
                     android:textColor="#000" />
             </android.support.design.widget.TextInputLayout>
 
@@ -593,54 +596,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/monto_maximo"
-                    android:inputType="number"
-                    android:textColor="#000" />
-            </android.support.design.widget.TextInputLayout>
-        </android.support.constraint.ConstraintLayout>
-
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout13"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/seguro"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView13"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txtSeguroSaldo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/seguro_hint"
                     android:inputType="number"
                     android:textColor="#000" />
             </android.support.design.widget.TextInputLayout>

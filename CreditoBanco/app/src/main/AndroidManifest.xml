@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/banco"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controllers.MainActivity">
+        <activity android:name=".controllers.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
