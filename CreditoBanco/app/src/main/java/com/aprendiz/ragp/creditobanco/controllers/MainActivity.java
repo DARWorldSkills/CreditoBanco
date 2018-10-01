@@ -2,9 +2,11 @@ package com.aprendiz.ragp.creditobanco.controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,11 +36,13 @@ public class MainActivity extends AppCompatActivity {
     List<Cliente> clienteList = new ArrayList<>();
 
     Spinner spModulo,spTipoSolicitud,spCliente;
-    EditText txtMontoCredito, txtPlazo, txtTea, txtSeguro;
-    TextView txtTotal;
+    EditText txtMontoCredito, txtPlazo, txtTea, txtSeguro,txtTotalCredito;
+    TextView txtTotal, txtTasaNo, txtTasaNoM;
+    Button btnCalcular;
     int positionSolicitud=0,positionCliente;
-    int tapiza =0, tamano=0;
-    float tasaTA=0;
+    int tapiza =0, tamano=0, plazo=1;
+    float tasaTA=0,tasaNo, tasaNoM;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +65,38 @@ public class MainActivity extends AppCompatActivity {
         txtPlazo = findViewById(R.id.txtPlazo);
         txtTea = findViewById(R.id.txtTea);
         txtSeguro = findViewById(R.id.txtSeguro);
+        txtTasaNo = findViewById(R.id.txtTasaNominal);
+        txtTasaNoM = findViewById(R.id.txtTasaNominalMensual);
+        txtTotalCredito = findViewById(R.id.txtTotalCredito);
         txtTotal = findViewById(R.id.txtResultado);
+        btnCalcular = findViewById(R.id.btnCalcular);
+        btnCalcular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                try {
+
+                    tamano = Integer.parseInt(txtMontoCredito.getText().toString());
+                    txtTotalCredito.setText(txtMontoCredito.getText().toString());
+                    try {
+                        plazo = Integer.parseInt(txtPlazo.getText().toString());
+                        calcularTodo();
+                        Toast.makeText(MainActivity.this, "Cálculo terminado", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                        txtPlazo.setError("Falta este campo por ingresar");
+                        Toast.makeText(MainActivity.this, "No has ingreaso el campo plazo", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }catch (Exception e){
+                    txtMontoCredito.setError("Falta este campo por ingresar");
+                    Toast.makeText(MainActivity.this, "No has ingreaso el campo Monto credito", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
     }
 
     private void listar() {
@@ -188,12 +223,37 @@ public class MainActivity extends AppCompatActivity {
     public void calcularTapiza(){
         ManagerDB managerDB = new ManagerDB(this);
         tapiza= managerDB.selectTapizar(solicitudList.get(positionSolicitud).getId(),clienteList.get(positionCliente).getId()).get(0).getRetorno();
+        Log.e("Tapiza", String.valueOf(tapiza));
 
     }
     public  void calcularTasa(){
         ManagerDB managerDB = new ManagerDB(this);
-        tasaTA = managerDB.selectTasa(tapiza,tamano);
+        tasaTA = (managerDB.selectTasa(tapiza,tamano));
+        txtTea.setText(Float.toString(tasaTA));
+    }
 
+    public void calcularTasaNominal(){
+        tasaNo = (float) (tasaTA * 1.19);
+        txtTasaNo.setText(Float.toString(tasaNo));
+    }
+
+    public void caluclarTasaNominalMe(){
+        tasaNoM = tasaNo/plazo;
+        txtTasaNoM.setText(Float.toString(tasaNoM));
+    }
+
+    public float resultado (){
+        float seguro = (float) (tamano*0.00099);
+        txtSeguro.setText(Float.toString(seguro));
+        return (float) (((tamano + seguro) / plazo )+ ((tamano*tasaNoM)*0.01));
+    }
+
+    public void calcularTodo(){
+        calcularTapiza();
+        calcularTasa();
+        calcularTasaNominal();
+        caluclarTasaNominalMe();
+        txtTotal.setText(Float.toString(resultado()));
     }
 
 }
